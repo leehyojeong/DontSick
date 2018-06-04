@@ -15,7 +15,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class JoinActivity extends AppCompatActivity {
 
-    Button join = (Button) findViewById(R.id.join);
+   private Button join;
   //  FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -23,6 +23,7 @@ public class JoinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
+        join = (Button) findViewById(R.id.join);
         join.setOnClickListener(new Button.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
