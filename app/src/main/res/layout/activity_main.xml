@@ -2,24 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background"
-    tools:context="com.example.hyoju.dontsick.MainActivity">
+    android:background = "@drawable/background"
+    tools:context=".MainActivity">
 
     <ImageView
-        android:layout_width="250dp"
-        android:layout_height="70dp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:background="@drawable/where"/>
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@drawable/dontsick"/>
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="50dp"
+        app:srcCompat="@drawable/title" />
+
 
     <LinearLayout
         android:layout_width="300dp"
@@ -27,88 +23,45 @@
         android:orientation="vertical"
         android:layout_gravity="center"
         android:gravity="center">
-    <Button
-        android:id="@+id/head"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="머리"
-        android:layout_gravity="center"
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:inputType="numberPassword"
         android:gravity="center"
-        android:background="@drawable/head"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:hint = "password"
         />
-    <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="95dp"
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="218dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="#37C3DA"
+        android:text="로그인"
+        android:textColor="#FFFFFF"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/join"
+        android:layout_width="218dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/arm1"
-            android:layout_width="35dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:background="@drawable/lefthand"
-            android:gravity="center"
-            android:text="팔"
-            android:layout_marginBottom="6dp"/>
-        <LinearLayout
-            android:layout_width="50dp"
-            android:layout_height="100dp"
-            android:orientation="vertical">
-            <Button
-                android:id="@+id/chest"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="가슴"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@drawable/chest" />
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="배"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@drawable/stomach"
-                android:paddingBottom="10dp"/>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/arm2"
-            android:layout_width="35dp"
-            android:layout_height="70dp"
-            android:text="팔"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:background="@drawable/righthand"
-            android:layout_marginBottom="6dp"/>
+        android:layout_marginBottom="83dp"
+        android:layout_marginTop="0dp"
+        android:background="#37C3DA"
+        android:gravity="center"
+        android:text="회원가입"
+        android:textColor="#FFFFFF" />
     </LinearLayout>
 
-    <Button
-        android:layout_width="50dp"
-        android:layout_height="80dp"
-        android:text="다리"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@drawable/leg"/>
-    </LinearLayout>
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@drawable/next_btn"
-        android:layout_marginTop="15dp"/>
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@drawable/search_disease"
-        android:layout_marginTop="5dp"/>
-
-        
 </LinearLayout>
-    
-

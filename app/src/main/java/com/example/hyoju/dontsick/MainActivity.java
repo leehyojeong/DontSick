@@ -1,65 +1,56 @@
 package com.example.hyoju.dontsick;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button head;
+
+    private Button Login;
+    private Button Join;
+    private EditText pass;
+
+    //Map<String, Object> user = new HashMap<>();
+
+
+    FirebaseFirestore database = FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final List<String> selectItems=new ArrayList<String>();
+        pass = (EditText) findViewById(R.id.password);
 
-        head=(Button) findViewById(R.id.head);
-        head.setOnClickListener(new View.OnClickListener(){
+
+        Login = (Button) findViewById(R.id.login);
+        Login.setOnClickListener(new Button.OnClickListener() {//로그인버튼 클릭할 때
 
             @Override
             public void onClick(View v) {
-                final String[] items=new String[]{"눈","귀","코","입","이","목"};
-                AlertDialog.Builder dialog=new AlertDialog.Builder(MainActivity.this);
-                dialog.setTitle("신체부위를 선택하세요")
-                        .setMultiChoiceItems(items,
-                                new boolean[]{false,false,false,false,false,false},
-                                new DialogInterface.OnMultiChoiceClickListener(){
 
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
-                                        if(isChecked){
-                                            Toast.makeText(MainActivity.this,items[which],Toast.LENGTH_SHORT).show();
-                                            selectItems.add(items[which]);}
-                                        else{
-                                            selectItems.remove(items[which]);
-                                        }
-                                    }
-                                })
-                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int which) {
-                                if(selectItems.size()==0){
-                                    Toast.makeText(MainActivity.this,"선택되지 않았습니다",Toast.LENGTH_SHORT).show();
-                                }else{
-                                    String items="";
-                                    for(String selectedItmes:selectItems){
-                                        items+=(selectedItmes+", ");
-                                    }
-                                    selectItems.clear();
+            }
+        });
 
-                                    items=items.substring(0,items.length()-2);
-                                    Toast.makeText(MainActivity.this,items,Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }).create().show();
+        Join = (Button) findViewById(R.id.join);
+        Join.setOnClickListener(new Button.OnClickListener() {//회원가입버튼 클릭할 때
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "35045784646",
+    "firebase_url": "https://dontsick-6f96d.firebaseio.com",
+    "project_id": "dontsick-6f96d",
+    "storage_bucket": "dontsick-6f96d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35045784646:android:a9af7f13c88824d7",
+        "android_client_info": {
+          "package_name": "com.example.hyoju.dontsick"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35045784646-rs5ggb3r85er6d5cnflsrifjabcsi7vm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hyoju.dontsick",
+            "certificate_hash": "797c81dc01c11d53d7c6b6eac92dcaf04dd4c8c6"
+          }
+        },
+        {
+          "client_id": "35045784646-tg4159rck4hr5hj36kl9d59h5pmqj2oo.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "35045784646-tg4159rck4hr5hj36kl9d59h5pmqj2oo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK_13IezvcwY4v7CGpwgR-UnlkidAagV8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35045784646-tg4159rck4hr5hj36kl9d59h5pmqj2oo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35045784646:android:d7a58200b134f537",
+        "android_client_info": {
+          "package_name": "com.example.my.sick"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35045784646-5t7c3vcs7g3khpepkv5jcvb3vde691up.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.my.sick",
+            "certificate_hash": "797c81dc01c11d53d7c6b6eac92dcaf04dd4c8c6"
+          }
+        },
+        {
+          "client_id": "35045784646-tg4159rck4hr5hj36kl9d59h5pmqj2oo.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "35045784646-tg4159rck4hr5hj36kl9d59h5pmqj2oo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK_13IezvcwY4v7CGpwgR-UnlkidAagV8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35045784646-tg4159rck4hr5hj36kl9d59h5pmqj2oo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
