@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String[] items=new String[]{"눈","귀","코","입","이","목"};
                 AlertDialog.Builder dialog=new AlertDialog.Builder(MainActivity.this);
-                dialog.setTitle("신체부위를 선택하세요")
+                dialog.setTitle("부위를 선택하세요")
                         .setMultiChoiceItems(items,
                                 new boolean[]{false,false,false,false,false,false},
                                 new DialogInterface.OnMultiChoiceClickListener(){
