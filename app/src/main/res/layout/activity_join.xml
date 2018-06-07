@@ -29,13 +29,14 @@
 
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editName"
             android:layout_width="300dp"
             android:layout_height="38dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:background="#FFFFFF"
             android:textColor="#37C3DA"
+            android:privateImeOptions="defaultInputmode=korean;"
             android:hint= "이름을 입력하세요"
             />
 
@@ -55,14 +56,15 @@
 
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/editPass"
             android:layout_width="300dp"
             android:layout_height="38dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="number"
+            android:maxLength="11"
             android:background="#FFFFFF"
             android:textColor="#37C3DA"
-            android:hint="비밀번호를 입력하세요(숫자 4자리)"
+            android:hint="휴대폰번호를 입력하세요(-제외)"
             />
     </LinearLayout>
 
