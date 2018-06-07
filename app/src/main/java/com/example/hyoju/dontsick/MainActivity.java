@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private Button NoJoin;
     private EditText pass;
     private TextView login;
+
     //Map<String, Object> user = new HashMap<>();
 
 
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.password);
         login = (TextView) findViewById(R.id.failure);
         Login = (Button) findViewById(R.id.login);
+
+        ((MyClass)this.getApplication()).Init();
 
         Login.setOnClickListener(new Button.OnClickListener() {//로그인버튼 클릭할 때
             @Override
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                                         Log.d("database",passS[1]);
                                         String info = passS[1].trim();
                                         if (info.equals(cPass)) {
-                                            pass.setText("");
+                                            ((MyClass)getApplication()).userInfo = text;
                                             Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
                                             startActivity(intent);
                                         }
@@ -78,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                         });
-
             }
 
         });

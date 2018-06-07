@@ -1,12 +1,18 @@
 package com.example.hyoju.dontsick;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class SymptomActivity extends AppCompatActivity {
 
@@ -20,9 +26,29 @@ public class SymptomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_symptom);
 
         search = (EditText)findViewById(R.id.symptom_search);
-        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        search.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(keyCode == KeyEvent.KEYCODE_ENTER){
+                    String mySearch = search.getText().toString();//증상을 입력
+                    mySearch = mySearch.trim();
+                    int index = ((MyClass)getApplication()).hosIndex;
+                    for(int i = 0;i< ((MyClass)getApplication()).hos[index].length;i++){
+                        data.collection(((MyClass)getApplication()).hos[index][i])//병명 검색
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            for(DocumentSnapshot document : task.getResult()){
+                                                String db = document.getData().toString();
+                                                if()
+                                            }
+                                        }
+                                    }
+                                })
+                    }
+                }
                 return false;
             }
         });

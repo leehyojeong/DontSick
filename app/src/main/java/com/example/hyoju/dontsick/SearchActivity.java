@@ -51,6 +51,27 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
                                 if(selectItem[0] == null){
                                     Toast.makeText(SearchActivity.this,"선택되지 않았습니다",Toast.LENGTH_SHORT).show();
                                 }else{
+                                    ((MyClass)getApplication()).part = selectItem[0];
+                                    switch(selectItem[0]){
+                                        case "눈":
+                                            ((MyClass)getApplication()).hosIndex =0;
+                                            break;
+                                        case "코":
+                                            ((MyClass)getApplication()).hosIndex =1;
+                                            break;
+                                        case "입":
+                                            ((MyClass)getApplication()).hosIndex =2;
+                                            break;
+                                        case "귀":
+                                            ((MyClass)getApplication()).hosIndex =3;
+                                            break;
+                                        case "이":
+                                            ((MyClass)getApplication()).hosIndex =4;
+                                            break;
+                                        case "목":
+                                            ((MyClass)getApplication()).hosIndex =5;
+                                            break;
+                                    }
                                     Intent intent = new Intent(getApplicationContext(), SymptomActivity.class);
                                     startActivity(intent);
                                 }
@@ -61,11 +82,28 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
 
     }
     public void onClick(View view) {
-        if(view.getId() == R.id.arm1 || view.getId() == R.id.arm2 ||
-                view.getId() == R.id.leg || view.getId() ==R.id.chest ||
-                view.getId() ==R.id.stomach){
+        if(view.getId() == R.id.arm1 || view.getId() == R.id.arm2 )
+        {
+            ((MyClass)getApplication()).part = "팔";
+            ((MyClass)getApplication()).hosIndex =6;
+            Intent intent = new Intent(getApplicationContext(), SymptomActivity.class);
+            startActivity(intent);
+        }else if(view.getId() == R.id.leg ) {
+            ((MyClass)getApplication()).part = "다리";
+            ((MyClass)getApplication()).hosIndex =7;
             Intent intent = new Intent(getApplicationContext(), SymptomActivity.class);
             startActivity(intent);
         }
-    }
+        else if(view.getId() ==R.id.chest){
+            ((MyClass)getApplication()).part = "가슴";
+            ((MyClass)getApplication()).hosIndex =8;
+            Intent intent = new Intent(getApplicationContext(), SymptomActivity.class);
+            startActivity(intent);
+        }else {
+            ((MyClass)getApplication()).part = "배";
+            ((MyClass)getApplication()).hosIndex =9;
+            Intent intent = new Intent(getApplicationContext(), SymptomActivity.class);
+            startActivity(intent);
+          }
+        }
 }
