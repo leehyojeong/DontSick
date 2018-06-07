@@ -25,7 +25,7 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
         setContentView(R.layout.activity_search);
 
         final List<String> selectItems=new ArrayList<String>();
-
+        final String[] selectItem = {null};
         mContext = this;
 
         head=(Button) findViewById(R.id.head);
@@ -36,34 +36,23 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
                 final String[] items=new String[]{"눈","귀","코","입","이","목"};
                 AlertDialog.Builder dialog=new AlertDialog.Builder(SearchActivity.this);
                 dialog.setTitle("부위를 선택하세요")
-                        .setMultiChoiceItems(items,
-                                new boolean[]{false,false,false,false,false,false},
-                                new DialogInterface.OnMultiChoiceClickListener(){
+                        .setSingleChoiceItems(items, -1,
+                                new DialogInterface.OnClickListener(){
 
                                     @Override
-                                    public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
-                                        if(isChecked){
-                                            Toast.makeText(SearchActivity.this,items[which],Toast.LENGTH_SHORT).show();
-                                            selectItems.add(items[which]);}
-                                        else{
-                                            selectItems.remove(items[which]);
-                                        }
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        selectItem[0] = items[which];
+                                        Toast.makeText(SearchActivity.this,items[which],Toast.LENGTH_SHORT).show();
                                     }
                                 })
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
-                                if(selectItems.size()==0){
+                                if(selectItem[0] == null){
                                     Toast.makeText(SearchActivity.this,"선택되지 않았습니다",Toast.LENGTH_SHORT).show();
                                 }else{
-                                    String items="";
-                                    for(String selectedItmes:selectItems){
-                                        items+=(selectedItmes+", ");
-                                    }
-                                    selectItems.clear();
-
-                                    items=items.substring(0,items.length()-2);
-                                    Toast.makeText(SearchActivity.this,items,Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), SymptomActivity.class);
+                                    startActivity(intent);
                                 }
                             }
                         }).create().show();
@@ -72,7 +61,9 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
 
     }
     public void onClick(View view) {
-        if(view.getId() == R.id.arm1 || view.getId() == R.id.arm2){
+        if(view.getId() == R.id.arm1 || view.getId() == R.id.arm2 ||
+                view.getId() == R.id.leg || view.getId() ==R.id.chest ||
+                view.getId() ==R.id.stomach){
             Intent intent = new Intent(getApplicationContext(), SymptomActivity.class);
             startActivity(intent);
         }
