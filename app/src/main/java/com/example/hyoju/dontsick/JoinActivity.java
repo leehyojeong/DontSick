@@ -63,8 +63,9 @@ public class JoinActivity extends AppCompatActivity {
                                                                 Log.d("text",text);
                                                                 String Info[] = text.split(",");//데이터베이스 데이터 분리
                                                                 String passS[] = Info[2].split("=");//비밀번호만 분리
+                                                                passS[1] = passS[1].replace("}","");//{를 공백으로 대체
                                                                 String info = passS[1].trim();//비밀번호 공백 제거
-                                                                spass = spass.trim();//혹시 모를 공백 제거
+                                                                spass = spass.trim();//혹시 모를 공백 제거(입력받은 값)
                                                                 if(spass.equals(info)){
                                                                     name.setText("");
                                                                     password.setText("");

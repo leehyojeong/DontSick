@@ -57,15 +57,21 @@ public class MainActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     for (DocumentSnapshot document : task.getResult()) {
                                         String text = String.valueOf(document.getData());
-                                        String Info[] = text.split(",");
-                                        String passS[] = Info[2].split("=");
-                                        String cPass = pass.getText().toString().trim();
+                                        Log.d("text",text);
+                                        String Info[] = text.split(",");//데이터베이스에서 데이터 받아옴
+                                        String passS[] = Info[2].split("=");//휴대폰번호 text와 값 분리
+                                        String cPass = pass.getText().toString().trim();//내가 입력받은 거에서 공백 제거
+                                        passS[1] = passS[1].replace("}","");//}를 공백으로 대체
+                                        Log.d("user",cPass);
+                                        Log.d("database",passS[1]);
                                         String info = passS[1].trim();
                                         if (info.equals(cPass)) {
+                                            pass.setText("");
                                             Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
                                             startActivity(intent);
                                             break;
                                         }
+                                        pass.setText("");
                                     }
                                 } else {
                                     Log.w("TAG", "Error Gettting document.", task.getException());
