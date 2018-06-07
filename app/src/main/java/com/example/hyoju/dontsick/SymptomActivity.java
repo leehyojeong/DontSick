@@ -53,4 +53,11 @@ public class SymptomActivity extends AppCompatActivity {
             }
         });
     }
+    public void lookHospital(){
+
+    }
+    public void lookDisease() {
+
+    }
+
 }
