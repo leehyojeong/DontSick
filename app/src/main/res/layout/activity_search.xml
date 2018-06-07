@@ -11,6 +11,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/background"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 632c5f591d9d1ed95ebd410ff9ae957e1893818f
         tools:context="com.example.hyoju.dontsick.MainActivity">
 
 

@@ -69,10 +69,9 @@ public class MainActivity extends AppCompatActivity {
                                             pass.setText("");
                                             Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
                                             startActivity(intent);
-                                            break;
                                         }
-                                        pass.setText("");
                                     }
+                                    pass.setText("");
                                 } else {
                                     Log.w("TAG", "Error Gettting document.", task.getException());
                                 }

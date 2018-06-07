@@ -11,6 +11,7 @@
 
     <EditText
         android:layout_width="330dp"
+        android:id="@+id/symptom_search"
         android:layout_height="50dp"
         android:gravity="center"
         android:background="@drawable/symptom_search"
