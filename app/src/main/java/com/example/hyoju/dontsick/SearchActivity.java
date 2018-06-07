@@ -1,5 +1,6 @@
 package com.example.hyoju.dontsick;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -8,15 +9,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.view.View.OnClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements OnClickListener{
 
     private Button head;
     private Button nextBtn;
-    private Button Arm1,Arm2,Leg,Chest,Stomach;
+    public static Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,16 +26,7 @@ public class SearchActivity extends AppCompatActivity {
 
         final List<String> selectItems=new ArrayList<String>();
 
-        Arm1 = (Button)findViewById(R.id.arm1);
-        Arm1.setOnClickListener((View.OnClickListener) this);
-        Arm2 = (Button)findViewById(R.id.arm2);
-        Arm2.setOnClickListener((View.OnClickListener) this);
-        Leg = (Button)findViewById(R.id.leg);
-        Leg.setOnClickListener((View.OnClickListener) this);
-        Chest = (Button)findViewById(R.id.chest);
-        Chest.setOnClickListener((View.OnClickListener) this);
-        Stomach = (Button)findViewById(R.id.stomach);
-        Stomach.setOnClickListener((View.OnClickListener) this);
+        mContext = this;
 
         head=(Button) findViewById(R.id.head);
         head.setOnClickListener(new View.OnClickListener(){
@@ -76,9 +69,12 @@ public class SearchActivity extends AppCompatActivity {
                         }).create().show();
             }
         });
-    }
 
-    public void onClick(View V) {
-       
+    }
+    public void onClick(View view) {
+        if(view.getId() == R.id.arm1 || view.getId() == R.id.arm2){
+            Intent intent = new Intent(getApplicationContext(), SymptomActivity.class);
+            startActivity(intent);
+        }
     }
 }
