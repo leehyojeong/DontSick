@@ -1,6 +1,7 @@
 package com.example.hyoju.dontsick;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,12 +15,25 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
     private Button head;
+    private Button nextBtn;
+    private Button Arm1,Arm2,Leg,Chest,Stomach;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
         final List<String> selectItems=new ArrayList<String>();
+
+        Arm1 = (Button)findViewById(R.id.arm1);
+        Arm1.setOnClickListener((View.OnClickListener) this);
+        Arm2 = (Button)findViewById(R.id.arm2);
+        Arm2.setOnClickListener((View.OnClickListener) this);
+        Leg = (Button)findViewById(R.id.leg);
+        Leg.setOnClickListener((View.OnClickListener) this);
+        Chest = (Button)findViewById(R.id.chest);
+        Chest.setOnClickListener((View.OnClickListener) this);
+        Stomach = (Button)findViewById(R.id.stomach);
+        Stomach.setOnClickListener((View.OnClickListener) this);
 
         head=(Button) findViewById(R.id.head);
         head.setOnClickListener(new View.OnClickListener(){
@@ -62,6 +76,9 @@ public class SearchActivity extends AppCompatActivity {
                         }).create().show();
             }
         });
+    }
 
+    public void onClick(View V) {
+       
     }
 }

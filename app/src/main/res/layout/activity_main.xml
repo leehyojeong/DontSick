@@ -72,10 +72,10 @@
             android:layout_gravity="center"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
-            android:background="#37C3DA"
+            android:background="@drawable/easyuse"
             android:gravity="center"
             android:textColor="#FFFFFF"
-            android:text="간편이용" />
+             />
     </LinearLayout>
 
     <TextView
