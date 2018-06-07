@@ -78,7 +78,7 @@ public class JoinActivity extends AppCompatActivity {
                                                                             @Override
                                                                             public void onSuccess(DocumentReference documentReference) {
                                                                                 user.clear();
-                                                                                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                                                                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                                                                 startActivity(intent);
                                                                             }
                                                                         })

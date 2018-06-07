@@ -55,7 +55,8 @@
             android:layout_gravity="center"
             android:text="머리"
             android:gravity="center"
-            />
+            android:onClick="onClick"
+            tools:ignore="OnClick" />
         <LinearLayout
             android:layout_width="320dp"
             android:layout_height="115dp"
@@ -70,7 +71,13 @@
                 android:background="@drawable/lefthand"
                 android:gravity="center"
                 android:text="팔"
+<<<<<<< HEAD
                 android:layout_marginBottom="3dp"/>
+=======
+                android:onClick="onClick"
+                android:layout_marginBottom="6dp"
+                tools:ignore="OnClick" />
+>>>>>>> 9fee1821bd581e2f176aa2cb47934ebb54e24b84
             <LinearLayout
                 android:layout_width="70dp"
                 android:layout_height="120dp"
@@ -82,7 +89,9 @@
                     android:text="가슴"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:background="@drawable/chest" />
+                    android:onClick="onClick"
+                    android:background="@drawable/chest"
+                    tools:ignore="OnClick" />
                 <Button
                     android:id="@+id/stomach"
                     android:layout_width="70dp"
@@ -91,7 +100,13 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:background="@drawable/stomach"
+<<<<<<< HEAD
                     android:paddingBottom="30dp"/>
+=======
+                    android:onClick="onClick"
+                    android:paddingBottom="10dp"
+                    tools:ignore="OnClick" />
+>>>>>>> 9fee1821bd581e2f176aa2cb47934ebb54e24b84
             </LinearLayout>
 
             <Button
@@ -102,7 +117,13 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:background="@drawable/righthand"
+<<<<<<< HEAD
                 android:layout_marginBottom="3dp"/>
+=======
+                android:onClick="onClick"
+                android:layout_marginBottom="6dp"
+                tools:ignore="OnClick" />
+>>>>>>> 9fee1821bd581e2f176aa2cb47934ebb54e24b84
         </LinearLayout>
 
         <Button
@@ -112,7 +133,9 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/leg"
-            android:background="@drawable/leg"/>
+            android:onClick="onClick"
+            android:background="@drawable/leg"
+            tools:ignore="OnClick" />
 
     </LinearLayout>
 
