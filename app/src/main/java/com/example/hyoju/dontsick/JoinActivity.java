@@ -28,7 +28,6 @@ public class JoinActivity extends AppCompatActivity {
    EditText password;
     String sname;
     String spass;
-
     Map<String, Object> user = new HashMap<>();
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
