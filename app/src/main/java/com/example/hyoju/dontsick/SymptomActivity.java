@@ -1,5 +1,6 @@
 package com.example.hyoju.dontsick;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,8 +8,10 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -17,6 +20,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class SymptomActivity extends AppCompatActivity {
 
     FirebaseFirestore data = FirebaseFirestore.getInstance();
@@ -24,10 +30,13 @@ public class SymptomActivity extends AppCompatActivity {
     EditText search;
     String mySearch;
 
+
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_symptom);
+
 
         search = (EditText)findViewById(R.id.symptom_search);
         search.setOnKeyListener(new View.OnKeyListener() {
@@ -38,18 +47,27 @@ public class SymptomActivity extends AppCompatActivity {
                     mySearch = mySearch.trim();
                     int index = ((MyClass)getApplication()).hosIndex;
                     for(int i = 0;i< ((MyClass)getApplication()).hos[index].length;i++){//병원
-                        data.collection(((MyClass)getApplication()).hos[index][i])//병명 검색
+                        String hospital = ((MyClass)getApplication()).hos[index][i];
+                        String hospitalArr[] = hospital.split(",");
+                        for(int j = 0;j<hospitalArr.length;j++){
+                            hospitalArr[i] = hospitalArr[i].trim();
+                        }
+                        for(int j = 0;j<hospitalArr.length;j++)
+                        Log.d("CHECK1",hospital);
+                        data.collection(hospitalArr[i])//병명 검색
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()){
                                             for(DocumentSnapshot document : task.getResult()){
-                                                String db = document.getData().toString();
-                                                Log.d("증상",db);
-                                                if(db.contains(mySearch)){//만약 그 증상이 있으면
-                                                    LinearLayout layout = new LinearLayout(SymptomActivity.this);
-                                                    TextView text = new TextView(SymptomActivity.this);
+                                                Map<String, Object> map = document.getData();
+                                                for(Map.Entry<String,Object> entry:map.entrySet()){
+                                                    Log.d("CHECK",entry.getKey());//getKey가 병이름
+                                                    String list =  entry.getValue().toString();//getValue가 증상
+                                                    if(list.contains(mySearch)){
+
+                                                    }
                                                 }
                                             }
                                         }
