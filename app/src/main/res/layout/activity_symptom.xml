@@ -17,6 +17,8 @@
         android:background="@drawable/symptom_search"
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
+        android:singleLine="true"
+        android:lines="1"
         android:hint="증상을 입력해주세요"
         />
 
