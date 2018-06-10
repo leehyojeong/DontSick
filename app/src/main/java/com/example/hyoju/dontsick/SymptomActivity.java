@@ -5,11 +5,13 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +25,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class SymptomActivity extends AppCompatActivity {
+public class SymptomActivity extends AppCompatActivity{
 
     FirebaseFirestore data = FirebaseFirestore.getInstance();
 
     EditText search;
     String mySearch;
+    private Button Map;
 
 
     @SuppressLint("WrongViewCast")
@@ -77,6 +80,16 @@ public class SymptomActivity extends AppCompatActivity {
                     return true;
                 }
                 return false;
+            }
+        });
+
+        Map = (Button) findViewById(R.id.map);
+        Map.setOnClickListener(new Button.OnClickListener() {//회원가입버튼 클릭할 때
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                startActivity(intent);
             }
         });
     }

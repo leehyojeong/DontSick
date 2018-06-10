@@ -31,6 +31,7 @@
         android:layout_gravity="center"
         android:gravity="center">
         <Button
+            android:id="@+id/map"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginRight="55dp"
