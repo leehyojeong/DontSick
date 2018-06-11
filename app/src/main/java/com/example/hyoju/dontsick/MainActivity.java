@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         login = (TextView) findViewById(R.id.failure);
         Login = (Button) findViewById(R.id.login);
 
-        ((MyClass)this.getApplication()).Init();
-
         Login.setOnClickListener(new Button.OnClickListener() {//로그인버튼 클릭할 때
             @Override
             public void onClick(View v) {
