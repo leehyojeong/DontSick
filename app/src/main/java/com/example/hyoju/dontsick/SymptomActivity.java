@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -24,6 +25,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Text;
 
 import java.util.Map;
 
@@ -79,7 +82,7 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                             TextView key = new TextView(SymptomActivity.this);
                            key.setText(hospitalArr[finalJ]);
                             key.setId(R.id.hospital);
-                            key.setTextSize(30);
+                            key.setTextSize(50);
                             key.setGravity(Gravity.LEFT);
                            // key.setLayoutParams(layoutParams);
                             tmp.addView(key);
@@ -108,27 +111,28 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                                                            TextView key = new TextView(SymptomActivity.this);//이름
                                                             key.setText(entry.getKey());
                                                             key.setId(R.id.diseaseName);
-                                                            key.setTextSize(20);
+                                                            key.setTextSize(25);
                                                             key.setGravity(Gravity.LEFT);
 
                                                             LinearLayout sympL = new LinearLayout(SymptomActivity.this);
+                                                            HorizontalScrollView sc = new HorizontalScrollView(SymptomActivity.this);
                                                             sympL.setOrientation(LinearLayout.HORIZONTAL);
-                                                           // ScrollView scroll = new ScrollView(SymptomActivity.this);
                                                             for(int i = 0;i<sym.length-1;i++){
                                                                 TextView symp = new TextView(SymptomActivity.this);//증상
                                                                 symp.setLines(1);
-                                                              //  symp.setMovementMethod(new ScrollingMovementMethod());
                                                                 symp.setText("#"+sym[i]);
-                                                                symp.setTextSize(10);
+                                                                symp.setTextSize(18);
                                                                 symp.setGravity(Gravity.LEFT);
                                                                sympL.addView(symp);
-                                                               // scroll.addView(symp);
                                                             }
-
-                                                           // layoutParams.gravity = Gravity.LEFT;
-                                                          //  key.setLayoutParams(layoutParams);
-                                                            tmp.addView(sympL);
+                                                            sc.addView(sympL);
                                                             tmp.addView(key);
+                                                           // tmp.addView(sympL);
+                                                            tmp.addView(sc);
+                                                            TextView n = new TextView(SymptomActivity.this);
+                                                            n.setText(sym[sym.length-1]+"\n");
+                                                            tmp.addView(n);
+
 
                                                             Log.d("hospital", hospitalArr[finalJ]);
                                                             Log.d("CHECK", entry.getKey());//getKey가 병이름
