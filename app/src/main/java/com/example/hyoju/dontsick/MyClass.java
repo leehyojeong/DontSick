@@ -20,6 +20,4 @@ public class MyClass extends Application {
              };
     public String part;
     public int hosIndex;
-
-
 }

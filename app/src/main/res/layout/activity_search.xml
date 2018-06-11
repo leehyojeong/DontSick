@@ -52,7 +52,6 @@
             android:layout_height="70dp"
             android:background="@drawable/head"
             android:layout_gravity="center"
-            android:text="머리"
             android:gravity="center"
             android:onClick="onClick"
             tools:ignore="OnClick" />
@@ -69,7 +68,6 @@
                 android:layout_gravity="center"
                 android:background="@drawable/lefthand"
                 android:gravity="center"
-                android:text="팔"
                 android:layout_marginBottom="3dp"/>
 
             <LinearLayout
@@ -80,7 +78,6 @@
                     android:id="@+id/chest"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:text="가슴"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:onClick="onClick"
@@ -90,7 +87,6 @@
                     android:id="@+id/stomach"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:text="배"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:background="@drawable/stomach"
@@ -102,7 +98,6 @@
                 android:id="@+id/arm2"
                 android:layout_width="55dp"
                 android:layout_height="90dp"
-                android:text="팔"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:background="@drawable/righthand"
@@ -113,7 +108,6 @@
         <Button
             android:layout_width="70dp"
             android:layout_height="100dp"
-            android:text="다리"
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/leg"
