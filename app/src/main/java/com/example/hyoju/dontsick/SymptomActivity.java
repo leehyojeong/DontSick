@@ -3,6 +3,7 @@ package com.example.hyoju.dontsick;
 import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -17,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -54,11 +56,16 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
             final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.gravity = Gravity.LEFT;
 
+            //layout.setVisibility(View.GONE);
             search = (EditText) findViewById(R.id.symptom_search);
             search.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+
                     if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                        layout.removeAllViews();
+
                         mySearch = search.getText().toString().trim();//증상을 입력
                         int index = ((MyClass) getApplication()).hosIndex;
                         final String hospitalArr[] =  new String[((MyClass) getApplication()).hos[index].length];
@@ -78,15 +85,31 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                             TextView text = new TextView(SymptomActivity.this);
                             text.setText(" ");
                             tmp.addView(text);
-                          //  LinearLayout keylay = new LinearLayout(SymptomActivity.this);
+
+                            LinearLayout mapL = new LinearLayout(SymptomActivity.this);
+                            mapL.setOrientation(LinearLayout.HORIZONTAL);
+
                             TextView key = new TextView(SymptomActivity.this);
                            key.setText(hospitalArr[finalJ]);
                             key.setId(R.id.hospital);
                             key.setTextSize(50);
                             key.setGravity(Gravity.LEFT);
-                           // key.setLayoutParams(layoutParams);
-                            tmp.addView(key);
+                            mapL.addView(key);//병원 출력
 
+                            Button btn = new Button(SymptomActivity.this);
+                           ViewGroup.LayoutParams btnParams = new ViewGroup.LayoutParams(70,100);
+                           btn.setLayoutParams(btnParams);
+                            btn.setBackground(ContextCompat.getDrawable(SymptomActivity.this,R.drawable.map));
+                            btn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                            mapL.addView(btn);
+
+                            tmp.addView(mapL);
                             data.collection(hospitalArr[j])//병명 검색
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -112,7 +135,7 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                                                             key.setText(entry.getKey());
                                                             key.setId(R.id.diseaseName);
                                                             key.setTextSize(25);
-                                                            key.setGravity(Gravity.LEFT);
+                                                            key.setGravity(Gravity.LEFT);//병이름 출력
 
                                                             LinearLayout sympL = new LinearLayout(SymptomActivity.this);
                                                             HorizontalScrollView sc = new HorizontalScrollView(SymptomActivity.this);
@@ -124,13 +147,12 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                                                                 symp.setTextSize(18);
                                                                 symp.setGravity(Gravity.LEFT);
                                                                sympL.addView(symp);
-                                                            }
+                                                            }//증상출력
                                                             sc.addView(sympL);
                                                             tmp.addView(key);
-                                                           // tmp.addView(sympL);
                                                             tmp.addView(sc);
                                                             TextView n = new TextView(SymptomActivity.this);
-                                                            n.setText(sym[sym.length-1]+"\n");
+                                                            n.setText(sym[sym.length-1]+"\n");//병 의미 출력
                                                             tmp.addView(n);
 
 
@@ -150,16 +172,6 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                     return true;
                 }
                 //key끝
-            });
-
-            Map = (Button) findViewById(R.id.map);
-            Map.setOnClickListener(new Button.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-                    startActivity(intent);
-                }
             });
         }
 
