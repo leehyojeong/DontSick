@@ -64,7 +64,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(final GoogleMap map) {
 
         for(int i=0;i<info.length;i++){
-            if(info[i][0]==hospital) {
+            if(info[i][0].equals(hospital)) {
                 List<Address> list = null;
                 try {
                     list = geocoder.getFromLocationName(info[i][2],10);
@@ -72,17 +72,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     e.printStackTrace();
                     Log.e("test","입출력 오류 - 서버에서 주소변환시 에러발생");
                 }
-                Address addr = list.get(0);
-                double lat = addr.getLatitude();
-                double lon = addr.getLongitude();
+                if(list!=null) {
+                    Address addr = list.get(0);
+                    double lat = addr.getLatitude();
+                    double lon = addr.getLongitude();
+                    MarkerOptions markerOptions = new MarkerOptions();
 
-                MarkerOptions markerOptions = new MarkerOptions();
-
-                markerOptions
-                        .position(new LatLng(lon,lat))
-                        .title(info[i][1])
-                        .snippet(info[i][2]);
-                map.addMarker(markerOptions);
+                    markerOptions
+                            .position(new LatLng(lon,lat))
+                            .title(info[i][1])
+                            .snippet(info[i][2]);
+                    map.addMarker(markerOptions);
+                }
             }
         }
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.52487, 126.92723)));
