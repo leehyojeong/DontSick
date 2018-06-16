@@ -37,7 +37,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     Document doc = null;
     public String hospital;
-    public String info[][]=null;
+    public String info[][]=new String[0][0];
 
 
 
