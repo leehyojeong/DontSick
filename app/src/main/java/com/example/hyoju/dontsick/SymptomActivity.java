@@ -36,6 +36,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Map;
 
+
 import static com.example.hyoju.dontsick.R.layout.activity_symptom;
 
 
