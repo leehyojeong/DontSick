@@ -22,26 +22,12 @@
         android:hint="증상을 입력해주세요"
         />
 
-    <Button
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        />
 
-    <ScrollView
-        android:layout_width="330dp"
-        android:layout_height="430dp"
+    <ListView
+        android:id="@id/myListView"
+        android:layout_width="290dp"
+        android:layout_height="400dp"
         android:layout_gravity="center"
-        android:background="@drawable/result_back"
-        >
-        <LinearLayout
-            android:id="@+id/lay"
-            android:layout_width="330dp"
-            android:layout_height="430dp"
-            android:layout_marginTop="13dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:orientation="vertical"></LinearLayout>
-    </ScrollView>
+        android:layout_marginTop="30dp"></ListView>
+
 </LinearLayout>

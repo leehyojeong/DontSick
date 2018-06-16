@@ -13,11 +13,13 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -44,28 +46,24 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
         EditText search;
         String mySearch;
         private Button Map;
-        
-
+        ListViewAdapter adapter;
+        ListView listview;
         @SuppressLint("WrongViewCast")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(activity_symptom);
 
-            final LinearLayout layout = (LinearLayout)findViewById(R.id.lay);
-            final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.gravity = Gravity.LEFT;
+            adapter = new ListViewAdapter();
+            listview=(ListView)findViewById(R.id.myListView);
+           listview.setAdapter(adapter);
 
-            //layout.setVisibility(View.GONE);
             search = (EditText) findViewById(R.id.symptom_search);
             search.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-
                     if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                        layout.removeAllViews();
-
+                       // listview.removeAllViews();
                         mySearch = search.getText().toString().trim();//증상을 입력
                         int index = ((MyClass) getApplication()).hosIndex;
                         final String hospitalArr[] =  new String[((MyClass) getApplication()).hos[index].length];
@@ -75,41 +73,9 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                             hospitalArr[i] = hospital.trim();
                             Log.d("hospitalArr",hospitalArr[i]);
                         }
-
+                        Log.d("length", String.valueOf(hospitalArr.length));
                         for (int j = 0; j < hospitalArr.length; j++) {
                             final int finalJ = j;
-
-                            final LinearLayout tmp = new LinearLayout(SymptomActivity.this);
-                            tmp.setOrientation(LinearLayout.VERTICAL);
-
-                            TextView text = new TextView(SymptomActivity.this);
-                            text.setText(" ");
-                            tmp.addView(text);
-
-                            LinearLayout mapL = new LinearLayout(SymptomActivity.this);
-                            mapL.setOrientation(LinearLayout.HORIZONTAL);
-
-                            TextView key = new TextView(SymptomActivity.this);
-                           key.setText(hospitalArr[finalJ]);
-                            key.setId(R.id.hospital);
-                            key.setTextSize(50);
-                            key.setGravity(Gravity.LEFT);
-                            mapL.addView(key);//병원 출력
-
-                            Button btn = new Button(SymptomActivity.this);
-                           ViewGroup.LayoutParams btnParams = new ViewGroup.LayoutParams(70,100);
-                           btn.setLayoutParams(btnParams);
-                            btn.setBackground(ContextCompat.getDrawable(SymptomActivity.this,R.drawable.map));
-                            btn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-                                    startActivity(intent);
-                                }
-                            });
-                            mapL.addView(btn);
-
-                            tmp.addView(mapL);
                             data.collection(hospitalArr[j])//병명 검색
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -129,44 +95,31 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                                                             String sym[] = list.split(",");
                                                             for(int i = 0;i<sym.length;i++){
                                                                 sym[i] = sym[i].trim();
+                                                                Log.d("sym",sym[i]);
                                                             }
+                                                            /////////////////////////////////////
+                                                            String disName = entry.getKey();
+                                                            //////////////////////////////////////
 
-                                                           TextView key = new TextView(SymptomActivity.this);//이름
-                                                            key.setText(entry.getKey());
-                                                            key.setId(R.id.diseaseName);
-                                                            key.setTextSize(25);
-                                                            key.setGravity(Gravity.LEFT);//병이름 출력
+                                                            /////////////////////////////////////////////
+                                                            String symtmp = "";
+                                                            ////////////////////////////////////////////////
 
-                                                            LinearLayout sympL = new LinearLayout(SymptomActivity.this);
-                                                            HorizontalScrollView sc = new HorizontalScrollView(SymptomActivity.this);
-                                                            sympL.setOrientation(LinearLayout.HORIZONTAL);
                                                             for(int i = 0;i<sym.length-1;i++){
-                                                                TextView symp = new TextView(SymptomActivity.this);//증상
-                                                                symp.setLines(1);
-                                                                symp.setText("#"+sym[i]);
-                                                                symp.setTextSize(18);
-                                                                symp.setGravity(Gravity.LEFT);
-                                                               sympL.addView(symp);
+                                                                /////////////////////////////////////////
+                                                                symtmp  += ("#"+sym[i]);
+                                                                ///////////////////////////////////////////
                                                             }//증상출력
-                                                            sc.addView(sympL);
-                                                            tmp.addView(key);
-                                                            tmp.addView(sc);
-                                                            TextView n = new TextView(SymptomActivity.this);
-                                                            n.setText(sym[sym.length-1]+"\n");//병 의미 출력
-                                                            tmp.addView(n);
-
-
-                                                            Log.d("hospital", hospitalArr[finalJ]);
-                                                            Log.d("CHECK", entry.getKey());//getKey가 병이름
+                                                            //////////////////////////////////////////////////
+                                                            String meaning = sym[sym.length-1];
+                                                            //////////////////////////////////////////////////
+                                                            adapter.addItem(disName, symtmp,meaning);
                                                         }
                                                     }
                                                 }
                                             }
                                         }
                                     });
-
-
-                            layout.addView(tmp);
                         }//for끝
                     }
                     return true;
@@ -174,13 +127,4 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                 //key끝
             });
         }
-
-        public void lookHospital() {
-
-        }
-
-        public void lookDisease() {
-
-        }
-
     }

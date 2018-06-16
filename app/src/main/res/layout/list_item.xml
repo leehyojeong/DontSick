@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/symptomName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="20dp"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal">
+        <TextView
+            android:id="@+id/symptomInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="15dp" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/symptommean"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="10dp"/>
+
+
+</LinearLayout>
