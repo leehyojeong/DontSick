@@ -25,9 +25,10 @@
 
     <ListView
         android:id="@id/myListView"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
+        android:layout_width="330dp"
+        android:layout_height="417dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"></ListView>
+        android:layout_marginTop="25dp"
+        android:background="@drawable/result_back"></ListView>
 
 </LinearLayout>

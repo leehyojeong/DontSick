@@ -127,6 +127,7 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                 }
                 //key끝
             });
+            search.setText(null);
 
         }
     }
