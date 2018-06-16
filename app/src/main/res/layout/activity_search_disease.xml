@@ -11,7 +11,7 @@
 
     <EditText
         android:layout_width="330dp"
-        android:id="@+id/symptom_search"
+        android:id="@+id/disease_search"
         android:layout_height="55dp"
         android:gravity="center"
         android:background="@drawable/input_back"
@@ -19,16 +19,15 @@
         android:layout_gravity="center"
         android:singleLine="true"
         android:lines="1"
-        android:hint="증상을 입력해주세요"
+        android:hint="병명을 입력해주세요"
         />
 
-
-    <ListView
-        android:id="@id/myListView"
-        android:layout_width="330dp"
-        android:layout_height="417dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/result_back"></ListView>
+        android:text="TextView" />
+
 
 </LinearLayout>
