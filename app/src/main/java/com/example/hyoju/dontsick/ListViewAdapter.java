@@ -50,6 +50,8 @@ public class ListViewAdapter extends BaseAdapter {
             int pos = position;
             final Context context = parent.getContext();
 
+
+
             if(convertView == null){
 
                 convertView = LayoutInflater.from(context).inflate(R.layout.list_item,null);
@@ -77,31 +79,31 @@ public class ListViewAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     if(v.getId() == R.id.hospitalButton){
-                        MapActivity m = new MapActivity();
+                        Intent intent = new Intent(context, MapActivity.class);
                         switch(listItem.get(position).hospital){//여기다가 지도 연결하셈
                             case "내과":
-                                m.hospital="내과";
+                                intent.putExtra("HospitalKey","내과");
                                 break;
                             case "외과":
-                                m.hospital="외과";
+                                intent.putExtra("HospitalKey","외과");
                                 break;
                             case "안과":
-                                m.hospital="안과";
+                                intent.putExtra("HospitalKey","안과");
                                 break;
                             case "치과":
-                                m.hospital="치과";
+                                intent.putExtra("HospitalKey","치과");
                                 break;
                             case "이비인후과":
-                                m.hospital="이비인후과";
+                                intent.putExtra("HospitalKey","이비인후과");
                                 break;
                             case "피부과":
-                                m.hospital="피부과";
+                                intent.putExtra("HospitalKey","피부과");
                                 break;
                             case "소아청소년과":
-                                m.hospital="소아청소년과";
+                                intent.putExtra("HospitalKey","소아청소년과");
                                 break;
                         }
-                        Intent intent = new Intent(context, MapActivity.class);
+
                         context.startActivity(intent);
                     }
 

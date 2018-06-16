@@ -66,13 +66,15 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
            listview.setAdapter(adapter);
 
 
+
             search = (EditText) findViewById(R.id.symptom_search);
             search.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                      //  listview.removeAllViews();
 
+                        adapter.listItem.clear();
+                        
                         mySearch = search.getText().toString().trim();//증상을 입력
                         int index = ((MyClass) getApplication()).hosIndex;
                         final String hospitalArr[] =  new String[((MyClass) getApplication()).hos[index].length];

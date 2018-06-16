@@ -30,7 +30,7 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
     private Button head;
     private Button nextBtn;
     public static Context mContext;
-
+        public String myEdit="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,10 +99,9 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
                 if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
-                    SearchDiseaseActivity s = new SearchDiseaseActivity();
-                    s.myEdit = search_diseasText.getText().toString().trim();
-                    s.Search();
+                    myEdit = search_diseasText.getText().toString();
                     Intent intent = new Intent(getApplicationContext(), SearchDiseaseActivity.class);
+                    intent.putExtra("EditTextValue",myEdit);
                     startActivity(intent);
                 }
                 return false;
