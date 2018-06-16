@@ -37,7 +37,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     Document doc = null;
     public String hospital;
-    public String info[][]=new String[0][0];
+    public String info[][]=null;
+
 
 
     @Override
@@ -77,13 +78,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 MarkerOptions markerOptions = new MarkerOptions();
 
                 markerOptions
-                        .position(new LatLng(lat,lon))
+                        .position(new LatLng(lon,lat))
                         .title(info[i][1])
                         .snippet(info[i][2]);
                 map.addMarker(markerOptions);
-                map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(lat,lon)));
             }
         }
+        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.52487, 126.92723)));
         map.animateCamera(CameraUpdateFactory.zoomTo(10));
     }
 
