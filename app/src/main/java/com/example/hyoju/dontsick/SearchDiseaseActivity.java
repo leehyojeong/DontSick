@@ -21,54 +21,44 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class SearchDiseaseActivity extends AppCompatActivity {
-
+    public String myEdit;
     FirebaseFirestore data = FirebaseFirestore.getInstance();
-     EditText search;
+    final ArrayList<String> inDisease = new ArrayList<String>();
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_disease);
-        final ArrayList<String> inDisease = new ArrayList<String>();
-        search = (EditText)findViewById(R.id.disease_search);
-        search.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-                if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
 
-                    final MyClass m = new MyClass();
-                    for(int i = 0;i<m.allHospital.length;i++){
-                        final int finalI = i;
-                        data.collection(m.allHospital[i])
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if(task.isSuccessful()){
-                                            for(DocumentSnapshot document: task.getResult()){
+    }
+    public void Search(){
+        final MyClass m = new MyClass();
+        for(int i = 0;i<m.allHospital.length;i++){
+            final int finalI = i;
+            data.collection(m.allHospital[i])
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(DocumentSnapshot document: task.getResult()){
 
-                                                Map<String,Object> map = document.getData();
+                                    Map<String,Object> map = document.getData();
 
-                                                for(Map.Entry<String,Object> entry: map.entrySet()){
-                                                    String list = entry.getKey().toString().trim();
-                                                    String my = search.getText().toString().trim();//내가 입력한 값
-                                                    if(list.equals(my)){
-                                                        Log.d("key",list);
-                                                        inDisease.add(m.allHospital[finalI]);
-                                                        Log.d("병원",m.allHospital[finalI]);
-                                                    }
-                                                }
-                                            }
+                                    for(Map.Entry<String,Object> entry: map.entrySet()){
+                                        String list = entry.getKey().toString().trim();
+                                        String my = myEdit;//내가 입력한 값
+                                        if(list.equals(my)){
+                                            Log.d("key",list);
+                                            inDisease.add(m.allHospital[finalI]);
+                                            Log.d("병원",m.allHospital[finalI]);
                                         }
                                     }
-                                });
-                    }
-                }
-                return false;
-            }
-        });
-
-
+                                }
+                            }
+                        }
+                    });
+        }
     }
 }

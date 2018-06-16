@@ -3,23 +3,34 @@ package com.example.hyoju.dontsick;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity implements OnClickListener{
 
     private Button head;
     private Button nextBtn;
     public static Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,12 +92,20 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
             }
         });
 
-        Button search_diseasButton = (Button)findViewById(R.id.search_name);
-        search_diseasButton.setOnClickListener(new OnClickListener() {
+        final EditText search_diseasText= (EditText)findViewById(R.id.search_name);
+
+        search_diseasText.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SearchDiseaseActivity.class);
-                startActivity(intent);
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
+                    SearchDiseaseActivity s = new SearchDiseaseActivity();
+                    s.myEdit = search_diseasText.getText().toString().trim();
+                    s.Search();
+                    Intent intent = new Intent(getApplicationContext(), SearchDiseaseActivity.class);
+                    startActivity(intent);
+                }
+                return false;
             }
         });
 
