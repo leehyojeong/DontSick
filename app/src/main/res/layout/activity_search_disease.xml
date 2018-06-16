@@ -21,10 +21,10 @@
         android:id="@+id/Name"
         android:layout_marginTop="250dp"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:text="TextView" />
 
     <TextView
@@ -36,12 +36,23 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/mean"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="30dp"
+        android:text="TextView"
+        android:textSize="20dp"
+        android:gravity="center"/>
 </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:scrollbars="horizontal">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"></LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,6 +25,9 @@ public class SearchDiseaseActivity extends AppCompatActivity {
     public String myEdit;
     FirebaseFirestore data = FirebaseFirestore.getInstance();
     final ArrayList<String> inDisease = new ArrayList<String>();
+    TextView name;
+    TextView symptom;
+    TextView mean;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,13 @@ public class SearchDiseaseActivity extends AppCompatActivity {
 
     }
     public void Search(){
+        name = (TextView)findViewById(R.id.Name);
+        symptom = (TextView)findViewById(R.id.symptom);
+        mean = (TextView)findViewById(R.id.mean);
+
+
+        String symp_mean;
+        final boolean check = true;
         final MyClass m = new MyClass();
         for(int i = 0;i<m.allHospital.length;i++){
             final int finalI = i;
@@ -50,6 +61,19 @@ public class SearchDiseaseActivity extends AppCompatActivity {
                                         String list = entry.getKey().toString().trim();
                                         String my = myEdit;//내가 입력한 값
                                         if(list.equals(my)){
+                                            if(check){
+                                                String list_tmp = entry.getValue().toString();//getValue가 증상
+                                                list_tmp =   list_tmp.replace("[","");
+                                                list_tmp =  list_tmp.replace("]","");
+                                                    String sym[] = list_tmp.split(",");
+                                                    for(int i = 0;i<sym.length;i++) {
+                                                        sym[i] = sym[i].trim();
+                                                    }
+                                                String symptom = "";
+                                                for(int i = 0;i<sym.length-1;i++){
+                                                    symptom += ("#"+sym[i]);
+                                                }//증상출력
+                                            }
                                             Log.d("key",list);
                                             inDisease.add(m.allHospital[finalI]);
                                             Log.d("병원",m.allHospital[finalI]);
