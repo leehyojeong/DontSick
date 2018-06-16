@@ -36,7 +36,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Map;
 
-//<<<<<<< HEAD
+
 import static com.example.hyoju.dontsick.R.layout.activity_symptom;
 
 
@@ -122,8 +122,13 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                                         }
                                     });
                         }//for끝
+                        return true;
                     }
-                    return true;
+
+                    if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL){
+
+                    }
+                    return false;
                 }
                 //key끝
             });
