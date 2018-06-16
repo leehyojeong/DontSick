@@ -40,6 +40,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public String info[][]= new String[0][0];
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

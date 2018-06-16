@@ -4,23 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background1"
+    android:background="#fff"
     android:orientation="vertical"
     tools:context="com.example.hyoju.dontsick.SymptomActivity">
 
 
-    <EditText
-        android:layout_width="330dp"
-        android:id="@+id/symptom_search"
-        android:layout_height="55dp"
-        android:gravity="center"
-        android:background="@drawable/input_back"
-        android:layout_marginTop="30dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:singleLine="true"
-        android:lines="1"
-        android:hint="증상을 입력해주세요"
-        />
+        android:layout_marginTop="30dp">
+
+        <EditText
+            android:id="@+id/symptom_search"
+            android:layout_width="330dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:backgroundTint="#1794a6"
+            android:gravity="center"
+            android:hint="증상을 입력해주세요"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="#1794a6"
+            android:textColorHint="#cfeaf5" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="-40dp"
+            android:layout_marginTop="3dp"
+            app:srcCompat="@drawable/search" />
+    </LinearLayout>
+
 
 
     <ListView
@@ -29,6 +46,6 @@
         android:layout_height="417dp"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
-        android:background="@drawable/result_back"></ListView>
+        android:divider="#0000"></ListView>
 
 </LinearLayout>

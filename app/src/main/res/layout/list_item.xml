@@ -16,11 +16,11 @@
             android:id="@+id/symptomName"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="10"
+            android:layout_weight="30"
             android:text="TextView"
-            android:textColor="#fff"
+            android:textColor="#f81e36"
             android:textSize="20dp" />
 
         <Button
@@ -28,7 +28,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:layout_weight="1"
             android:background="@drawable/map"
             android:imeOptions="actionDone"
@@ -45,16 +45,20 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="15dp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:textColor="#032030"/>
     </ScrollView>
 
     <TextView
         android:id="@+id/symptommean"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
         android:text="TextView"
-        android:textSize="10dp"
-        android:layout_marginLeft="20dp"/>
+        android:textColor="#1794a6"
+        android:textSize="10dp" />
 
 
 </LinearLayout>
