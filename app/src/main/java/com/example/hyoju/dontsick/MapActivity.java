@@ -39,6 +39,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public String hospital;
     public String info[][]=null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
