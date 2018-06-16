@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
@@ -32,6 +33,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 //<<<<<<< HEAD
@@ -47,7 +49,10 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
         String mySearch;
         private Button Map;
         ListViewAdapter adapter;
-        ListView listview;
+
+       ListView listview;
+
+
         @SuppressLint("WrongViewCast")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -55,27 +60,29 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
             setContentView(activity_symptom);
 
             adapter = new ListViewAdapter();
+
+
             listview=(ListView)findViewById(R.id.myListView);
            listview.setAdapter(adapter);
+
 
             search = (EditText) findViewById(R.id.symptom_search);
             search.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                       // listview.removeAllViews();
+                      //  listview.removeAllViews();
+
                         mySearch = search.getText().toString().trim();//증상을 입력
                         int index = ((MyClass) getApplication()).hosIndex;
                         final String hospitalArr[] =  new String[((MyClass) getApplication()).hos[index].length];
                         for (int i = 0; i < ((MyClass) getApplication()).hos[index].length; i++) {//병원
                             String hospital = ((MyClass) getApplication()).hos[index][i];
-                            Log.d("hospital",hospital);
                             hospitalArr[i] = hospital.trim();
-                            Log.d("hospitalArr",hospitalArr[i]);
                         }
-                        Log.d("length", String.valueOf(hospitalArr.length));
                         for (int j = 0; j < hospitalArr.length; j++) {
                             final int finalJ = j;
+
                             data.collection(hospitalArr[j])//병명 검색
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -89,31 +96,25 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                                                     for (Map.Entry<String, Object> entry : map.entrySet()) {
                                                         String list = entry.getValue().toString();//getValue가 증상
                                                         if (list.contains(mySearch)) {
-                                                            Log.d("string",list);
                                                           list =   list.replace("[","");
                                                            list =  list.replace("]","");
                                                             String sym[] = list.split(",");
                                                             for(int i = 0;i<sym.length;i++){
                                                                 sym[i] = sym[i].trim();
-                                                                Log.d("sym",sym[i]);
                                                             }
-                                                            /////////////////////////////////////
-                                                            String disName = entry.getKey();
-                                                            //////////////////////////////////////
 
-                                                            /////////////////////////////////////////////
+                                                            String disName = entry.getKey();
                                                             String symtmp = "";
-                                                            ////////////////////////////////////////////////
 
                                                             for(int i = 0;i<sym.length-1;i++){
-                                                                /////////////////////////////////////////
+
                                                                 symtmp  += ("#"+sym[i]);
-                                                                ///////////////////////////////////////////
+
                                                             }//증상출력
-                                                            //////////////////////////////////////////////////
+
                                                             String meaning = sym[sym.length-1];
-                                                            //////////////////////////////////////////////////
-                                                            adapter.addItem(disName, symtmp,meaning);
+
+                                                            adapter.addItem(disName, symtmp,meaning,hospitalArr[finalJ]);
                                                         }
                                                     }
                                                 }
@@ -126,5 +127,6 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                 }
                 //key끝
             });
+
         }
     }
