@@ -109,6 +109,7 @@
         android:layout_height="55dp"
         android:layout_gravity="center"
         android:gravity="center"
+        android:id="@+id/search_name"
         android:background="@drawable/search_disease"
         android:layout_marginTop="5dp"/>
 </LinearLayout>

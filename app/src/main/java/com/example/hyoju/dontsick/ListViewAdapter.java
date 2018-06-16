@@ -2,6 +2,7 @@ package com.example.hyoju.dontsick;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 public class ListViewAdapter extends BaseAdapter {
 
@@ -45,7 +48,7 @@ public class ListViewAdapter extends BaseAdapter {
 
 
             int pos = position;
-            Context context = parent.getContext();
+            final Context context = parent.getContext();
 
             if(convertView == null){
 
@@ -74,30 +77,34 @@ public class ListViewAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     if(v.getId() == R.id.hospitalButton){
+                        MapActivity m = new MapActivity();
                         switch(listItem.get(position).hospital){//여기다가 지도 연결하셈
                             case "내과":
-                                Log.d("클릭",listItem.get(position).hospital);
+                                m.hospital="내과";
                                 break;
                             case "외과":
-                                Log.d("클릭",listItem.get(position).hospital);
+                                m.hospital="외과";
                                 break;
                             case "안과":
-                                Log.d("클릭",listItem.get(position).hospital);
+                                m.hospital="안과";
                                 break;
                             case "치과":
-                                Log.d("클릭",listItem.get(position).hospital);
+                                m.hospital="치과";
                                 break;
                             case "이비인후과":
-                                Log.d("클릭",listItem.get(position).hospital);
+                                m.hospital="이비인후과";
                                 break;
                             case "피부과":
-                                Log.d("클릭",listItem.get(position).hospital);
+                                m.hospital="피부과";
                                 break;
                             case "소아청소년과":
-                                Log.d("클릭",listItem.get(position).hospital);
+                                m.hospital="소아청소년과";
                                 break;
                         }
+                        Intent intent = new Intent(context, MapActivity.class);
+                        context.startActivity(intent);
                     }
+
                 }
             });
         return convertView;

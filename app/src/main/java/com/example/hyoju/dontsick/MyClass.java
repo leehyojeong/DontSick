@@ -3,6 +3,7 @@ package com.example.hyoju.dontsick;
 import android.app.Application;
 
 import android.app.Application;
+import android.content.Intent;
 
 
 public class MyClass extends Application {
@@ -20,4 +21,9 @@ public class MyClass extends Application {
              };
     public String part;
     public int hosIndex;
+
+   public void callMap(){
+        Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+        startActivity(intent);
+    }
 }
