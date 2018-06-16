@@ -63,30 +63,34 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(final GoogleMap map) {
 
-        for(int i=0;i<info.length;i++){
-            if(info[i][0].equals(hospital)) {
+        for(int i=0;i<info.length;i++) {
+            if (info[i][0].equals(hospital)) {
                 List<Address> list = null;
                 try {
-                    list = geocoder.getFromLocationName(info[i][2],10);
+                    list = geocoder.getFromLocationName(info[i][2], 10);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.e("test","입출력 오류 - 서버에서 주소변환시 에러발생");
+                    Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
                 }
-                if(list!=null) {
-                    Address addr = list.get(0);
-                    double lat = addr.getLatitude();
-                    double lon = addr.getLongitude();
-                    MarkerOptions markerOptions = new MarkerOptions();
+                if (list != null) {
+                    if (list.size() == 0) {
+                        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.52487, 126.92723)));
+                    }else {
+                        Address addr = list.get(0);
+                        double lat = addr.getLatitude();
+                        double lon = addr.getLongitude();
+                        MarkerOptions markerOptions = new MarkerOptions();
 
-                    markerOptions
-                            .position(new LatLng(lon,lat))
-                            .title(info[i][1])
-                            .snippet(info[i][2]);
-                    map.addMarker(markerOptions);
+                        markerOptions
+                                .position(new LatLng(lat, lon))
+                                .title(info[i][1])
+                                .snippet(info[i][2]);
+                        map.addMarker(markerOptions);
+                        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(lat, lon)));
+                    }
                 }
             }
         }
-        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.52487, 126.92723)));
         map.animateCamera(CameraUpdateFactory.zoomTo(10));
     }
 
