@@ -122,8 +122,13 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                                         }
                                     });
                         }//for끝
+                        return true;
                     }
-                    return true;
+
+                    if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL){
+
+                    }
+                    return false;
                 }
                 //key끝
             });

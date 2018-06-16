@@ -19,11 +19,8 @@ public class MyClass extends Application {
             {"내과","외과","피부과","소아청소년과"},//가슴
             {"내과","외과","피부과","소아청소년과"}//배
              };
+    public String allHospital[] = {"안과","치과","이비인후과","내과","외과","피부과","소아청소년과"};
     public String part;
     public int hosIndex;
 
-   public void callMap(){
-        Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-        startActivity(intent);
-    }
 }

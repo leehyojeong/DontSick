@@ -81,6 +81,15 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
             }
         });
 
+        Button search_diseasButton = (Button)findViewById(R.id.search_name);
+        search_diseasButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchDiseaseActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
     public void onClick(View view) {
         if(view.getId() == R.id.arm1 || view.getId() == R.id.arm2 )
@@ -107,4 +116,5 @@ public class SearchActivity extends AppCompatActivity implements OnClickListener
             startActivity(intent);
           }
         }
+
 }
