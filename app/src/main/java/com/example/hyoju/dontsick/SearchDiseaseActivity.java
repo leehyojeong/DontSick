@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +27,7 @@ public class SearchDiseaseActivity extends AppCompatActivity {
     public String myEdit;
     FirebaseFirestore data = FirebaseFirestore.getInstance();
     final ArrayList<String> inDisease = new ArrayList<String>();
+    LinearLayout layout;
     TextView name;
     TextView symptom;
     TextView mean;
@@ -41,9 +44,6 @@ public class SearchDiseaseActivity extends AppCompatActivity {
         symptom = (TextView)findViewById(R.id.symptom);
         mean = (TextView)findViewById(R.id.mean);
 
-
-        String symp_mean;
-        final boolean check = true;
         final MyClass m = new MyClass();
         for(int i = 0;i<m.allHospital.length;i++){
             final int finalI = i;
@@ -60,8 +60,8 @@ public class SearchDiseaseActivity extends AppCompatActivity {
                                     for(Map.Entry<String,Object> entry: map.entrySet()){
                                         String list = entry.getKey().toString().trim();
                                         String my = myEdit;//내가 입력한 값
+                                        name.setText(my);
                                         if(list.equals(my)){
-                                            if(check){
                                                 String list_tmp = entry.getValue().toString();//getValue가 증상
                                                 list_tmp =   list_tmp.replace("[","");
                                                 list_tmp =  list_tmp.replace("]","");
@@ -69,14 +69,14 @@ public class SearchDiseaseActivity extends AppCompatActivity {
                                                     for(int i = 0;i<sym.length;i++) {
                                                         sym[i] = sym[i].trim();
                                                     }
-                                                String symptom = "";
+                                                String symptomTxt = "";
                                                 for(int i = 0;i<sym.length-1;i++){
-                                                    symptom += ("#"+sym[i]);
+                                                    symptomTxt += ("#"+sym[i]);
                                                 }//증상출력
-                                            }
-                                            Log.d("key",list);
-                                            inDisease.add(m.allHospital[finalI]);
-                                            Log.d("병원",m.allHospital[finalI]);
+                                                symptom.setText(symptomTxt);
+                                                String meaning = sym[sym.length-1];
+                                                mean.setText(meaning);
+                                                 inDisease.add(m.allHospital[finalI]);
                                         }
                                     }
                                 }
@@ -84,5 +84,8 @@ public class SearchDiseaseActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+    void InsertButton(){
+
     }
 }
