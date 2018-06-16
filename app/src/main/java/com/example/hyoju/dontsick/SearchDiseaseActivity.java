@@ -84,8 +84,14 @@ public class SearchDiseaseActivity extends AppCompatActivity {
                         }
                     });
         }
+        InsertButton();
     }
     void InsertButton(){
+        layout = (LinearLayout)findViewById(R.id.MyLayout);
 
+        for(int i = 0;i<inDisease.size();i++){
+            Button btn = new Button(SearchDiseaseActivity.this);
+
+        }
     }
 }
