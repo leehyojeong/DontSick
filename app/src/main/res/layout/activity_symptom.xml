@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/background1"
     android:orientation="vertical"
     tools:context="com.example.hyoju.dontsick.SymptomActivity">
 
@@ -12,31 +12,36 @@
     <EditText
         android:layout_width="330dp"
         android:id="@+id/symptom_search"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:gravity="center"
-        android:background="@drawable/symptom_search"
+        android:background="@drawable/input_back"
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
         android:singleLine="true"
         android:lines="1"
         android:hint="증상을 입력해주세요"
-        android:layout_marginBottom="20dp"
+        />
+
+    <Button
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button"
         />
 
     <ScrollView
         android:layout_width="330dp"
-        android:layout_height="450dp"
+        android:layout_height="430dp"
         android:layout_gravity="center"
-
+        android:background="@drawable/result_back"
         >
-
         <LinearLayout
             android:id="@+id/lay"
             android:layout_width="330dp"
-            android:layout_height="450dp"
-            android:layout_gravity="center"
+            android:layout_height="430dp"
             android:layout_marginTop="13dp"
             android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="vertical"></LinearLayout>
     </ScrollView>
 </LinearLayout>
