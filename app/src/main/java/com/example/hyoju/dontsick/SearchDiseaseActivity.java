@@ -43,16 +43,12 @@ public class SearchDiseaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_disease);
 
-        Log.d("들어옴","들어옴");
-
         Intent intent= getIntent();
        want_search =  intent.getExtras().getString("EditTextValue");
 
         name = (TextView)findViewById(R.id.Name);
         symptom = (TextView)findViewById(R.id.symptom);
         mean = (TextView)findViewById(R.id.mean);
-
-        Log.d("값 확인", want_search);
 
         layout = (LinearLayout)findViewById(R.id.MyLayout);
 
@@ -107,12 +103,5 @@ public class SearchDiseaseActivity extends AppCompatActivity {
                         }
                     });
         }
-    }
-    public void Search(String string){
-        want_search = string;
-
-    }
-    void InsertButton(){
-
     }
 }

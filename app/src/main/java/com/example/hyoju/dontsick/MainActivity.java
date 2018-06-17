@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         pass = (EditText) findViewById(R.id.password);
-        login = (TextView) findViewById(R.id.failure);
         Login = (Button) findViewById(R.id.login);
 
         Login.setOnClickListener(new Button.OnClickListener() {//로그인버튼 클릭할 때

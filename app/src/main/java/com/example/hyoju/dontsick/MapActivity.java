@@ -47,7 +47,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-Intent intent = getIntent();
+        Intent intent = getIntent();
         hospital = intent.getExtras().getString("HospitalKey");
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -62,10 +62,10 @@ Intent intent = getIntent();
 
 
 
-    final Geocoder geocoder = new Geocoder(this);
+    Geocoder geocoder;
     @Override
     public void onMapReady(final GoogleMap map) {
-
+        geocoder = new Geocoder(this);
         for(int i=0;i<info.length;i++) {
             if (info[i][0].equals(hospital)) {
                 List<Address> list = null;

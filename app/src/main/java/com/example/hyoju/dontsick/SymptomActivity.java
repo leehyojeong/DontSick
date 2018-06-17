@@ -74,7 +74,7 @@ import static com.example.hyoju.dontsick.R.layout.activity_symptom;
                     if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
 
                         adapter.listItem.clear();
-                        
+
                         mySearch = search.getText().toString().trim();//증상을 입력
                         int index = ((MyClass) getApplication()).hosIndex;
                         final String hospitalArr[] =  new String[((MyClass) getApplication()).hos[index].length];

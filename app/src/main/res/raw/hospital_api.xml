@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-<header>
-<header>구분</header>
-<header>의료기관명</header>
-<header>의료기관주소_도로명_</header>
-<header>의료기관전화번호</header>
-<header>데이터기준일자</header>
-</header>
 <Row>
 <구분>외과</구분>
 <의료기관명>메디스포정형외과의원</의료기관명>
