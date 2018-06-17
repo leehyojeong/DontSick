@@ -112,7 +112,7 @@
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:backgroundTint="#1794a6"
         android:gravity="center"
         android:hint="병명을 입력해주세요"
