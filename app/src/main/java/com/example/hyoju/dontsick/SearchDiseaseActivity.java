@@ -94,6 +94,14 @@ public class SearchDiseaseActivity extends AppCompatActivity {
                                                btn.setHeight(15);
                                                btn.setText(m.allHospital[finalI]);
                                                btn.setId(R.id.hospitalButton);
+                                               btn.setOnClickListener(new Button.OnClickListener() {
+                                                   @Override
+                                                   public void onClick(View v) {
+                                                       Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                                                       intent.putExtra("HospitalKey",m.allHospital[finalI]);
+                                                       startActivity(intent);
+                                                   }
+                                               });
                                                 layout.addView(btn);
 
                                         }

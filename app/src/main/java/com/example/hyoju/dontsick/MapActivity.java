@@ -1,7 +1,10 @@
 package com.example.hyoju.dontsick;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -16,18 +19,23 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -38,11 +46,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     Document doc = null;
     public String hospital;
-    public String info[][]=new String[0][0];
+    ArrayList<Hospital> list;
+    String add="";
+    GoogleMap googlemap;
 
-
-
-
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,92 +61,122 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         FragmentManager fragmentManager = getFragmentManager();
         MapFragment mapFragment = (MapFragment)fragmentManager.findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
 
-    public void onClick(View view){
-        GetXMLTask task = new GetXMLTask();
-        task.execute("R.raw.hospital_api");
-    }
+        list = new ArrayList<Hospital>();
+        XmlPullParser res = getResources().getXml((R.xml.hospital_api));
+        int eventType = 0;
+        String sTag="";
+        Hospital myHopital = null;
 
+        boolean check_type = false, check_name=false, check_add=false, check_phone=false;
+        try {
+            eventType = res.getEventType();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }while(eventType != XmlPullParser.END_DOCUMENT){
+            boolean check = false;
+            switch(eventType){
+                case XmlPullParser.START_DOCUMENT:
+                    sTag = res.getName();
+                    break;
+                case XmlPullParser.START_TAG:
+                    sTag = res.getName();
+                    if(sTag.equals("Row")){
+                        myHopital = new Hospital();
+                    }else if(sTag.equals("구분")){
+                        check_type = true;
+                    }else if(sTag.equals("의료기관명")){
+                       check_name = true;
+                    }else if(sTag.equals("의료기관전화번호")){
+                        check_phone= true;
+                    }else if(sTag.equals("의료기관주소_도로명_")){
+                        check_add = true;
+                    }
+                    break;
+                case XmlPullParser.TEXT:
+                    if(check_name){
+                        myHopital.name = res.getText();
+                        check_name = false;
+                    }if(check_phone){
+                    myHopital.phone = res.getText();
+                    check_phone = false;
+                }if(check_add){
+                    myHopital.add = res.getText();
+                    check_add = false;
+                }if(check_type){
+                    myHopital.type = res.getText();
+                    check_type = false;
+                }
+                    break;
+                case XmlPullParser.END_TAG:
+                    sTag = res.getName();
+                    if(sTag.equalsIgnoreCase("Row")  && myHopital != null ){
+                        list.add(myHopital);
+                        myHopital = null;
+                    }
+                    break;
+                case XmlPullParser.END_DOCUMENT:
+                    break;
+            }
+            try {
+                eventType=res.next();
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Log.d("size", String.valueOf(list.size()));
+    }
 
 
     Geocoder geocoder;
     @Override
     public void onMapReady(final GoogleMap map) {
+        googlemap = map;
         geocoder = new Geocoder(this);
-        for(int i=0;i<info.length;i++) {
-            if (info[i][0].equals(hospital)) {
-                List<Address> list = null;
+        for(int i=0;i<list.size();i++) {
+            if (list.get(i).getType().equals(this.hospital)) {//병원 종류가 같으면
+                List<Address> Llist = null;
                 try {
-                    list = geocoder.getFromLocationName(info[i][2], 10);
+                    Llist = geocoder.getFromLocationName(list.get(i).getAdd(), 20);//주소 1이 병원이름 0이 구분
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
                 }
-                if (list != null) {
-                    if (list.size() == 0) {
-                        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.52487, 126.92723)));
+                if (Llist != null) {
+                    if (Llist.size() == 0) {
+                        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.544905, 127.078145)));
                     }else {
-                        Address addr = list.get(0);
+                        Address addr = Llist.get(0);
                         double lat = addr.getLatitude();
                         double lon = addr.getLongitude();
                         MarkerOptions markerOptions = new MarkerOptions();
 
                         markerOptions
                                 .position(new LatLng(lat, lon))
-                                .title(info[i][1])
-                                .snippet(info[i][2]);
+                                .title(list.get(i).getName())
+                                .snippet(list.get(i).getAdd());
+
                         map.addMarker(markerOptions);
-                        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(50, 50)));
+                        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.544905, 127.078145)));
+
+                        googlemap.setOnMarkerClickListener(markerClickListener);
                     }
                 }else{
-                    map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(50, 50)));
+                    map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.544905, 127.078145)));
                 }
             }
         }
         map.animateCamera(CameraUpdateFactory.zoomTo(10));
     }
 
-    private class GetXMLTask extends AsyncTask<String, Void, Document>{
-
+    GoogleMap.OnMarkerClickListener markerClickListener = new GoogleMap.OnMarkerClickListener() {
         @Override
-        protected Document doInBackground(String... urls) {
-            URL url;
-            try{
-                url = new URL(urls[0]);
-                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                DocumentBuilder db = dbf.newDocumentBuilder();
-                doc = db.parse(new InputSource(url.openStream()));
-                doc.getDocumentElement().normalize();
-            }catch(Exception e){
-                Toast.makeText(getBaseContext(),"Parsing Error", Toast.LENGTH_SHORT).show();
-            }
-            return doc;
+        public boolean onMarkerClick(Marker marker) {
+            add = marker.getSnippet();
+            Log.d("add",add);
+            return false;
         }
-
-        protected void onPostExecute(Document doc){
-
-            NodeList nodeList = doc.getElementsByTagName("Row");
-            for(int i=0;i<nodeList.getLength();i++){
-                Node node = nodeList.item(i);
-                Element fstElmnt = (Element) node;
-
-                NodeList nameList = fstElmnt.getElementsByTagName("구분");
-                Element nameElement = (Element) nameList.item(0);
-                nameList = nameElement.getChildNodes();
-                info[i][0] = ((Node) nameList.item(0)).getNodeValue();
-
-                NodeList hosList = fstElmnt.getElementsByTagName("의료기관명");
-                Element hosElement = (Element) hosList.item(0);
-                hosList = hosElement.getChildNodes();
-                info[i][1] = ((Node) hosList.item(0)).getNodeValue();
-
-                NodeList addList = fstElmnt.getElementsByTagName("의료기관주소_도로명_");
-                Element addElement = (Element) addList.item(0);
-                addList = addElement.getChildNodes();
-                info[i][2] = ((Node) addList.item(0)).getNodeValue();
-            }
-            super.onPostExecute(doc);
-        }
-    }
+    };
 }
